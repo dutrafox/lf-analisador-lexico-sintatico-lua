@@ -26,8 +26,3 @@ P = {
 	Q48 -> =Q,
 	Q46 -> =Q
 }
-
-Principais dúvidas: 
-1. os estados finais do autômato, que são todos distintos, podem ser escrito por uma única regra? No caso a regra Q.
-2. as regras Q50, Q48 e Q46 podem ser uma única regra(ao invés de 3 qu fazem a mesma coisa)?
-3. posso usar os conjuntos, como descrito lá no topo do arquivo, pra simplificar a linguagem ou tenho que escrever tudo o que está inserido no conjunto?
