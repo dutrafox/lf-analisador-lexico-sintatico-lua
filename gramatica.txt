@@ -1,0 +1,33 @@
+L(ou l): é o conjunto L do automato
+N(ou n): é o conjunto N do automato
+v(ou V): é o conjunto V do automato
+
+
+P = {
+	 Q0 -> lQ44 | {-}Q44 | ""Q | \tQ | (Q | \Q | +Q | -Q | *Q62 | "Q60 | nQ58 |
+	       )Q | {Q | iQ | }Q | |Q | &Q | <Q50 | >Q48 | =Q46 | \nQ,
+	Q44 -> lQ44 | nQ44 | {-}Q44 | v-l-n-{-}Q45 | .Q2,
+	 Q2 -> rQ3 | wQ8,
+	 Q3 -> eQ4,
+	 Q4 -> aQ5,
+	 Q5 -> dQ6,
+	 Q6 -> v-l-n-{-}Q,
+	  Q -> ε,
+	 Q8 -> rQ9,
+	 Q9 -> iQ10,
+	Q10 -> tQ11,
+	Q11 -> v-l-n-{-}Q,
+	Q62 -> *Q | ε,
+	Q60 -> vQ60 | "Q,
+	Q58 -> nQ58 | .Q59 | v-nQ,
+	Q59 -> nQ1,
+	 Q1 -> nQ1 | v-nQ,
+	Q50 -> =Q,
+	Q48 -> =Q,
+	Q46 -> =Q
+}
+
+Principais dúvidas: 
+1. os estados finais do autômato, que são todos distintos, podem ser escrito por uma única regra? No caso a regra Q.
+2. as regras Q50, Q48 e Q46 podem ser uma única regra(ao invés de 3 qu fazem a mesma coisa)?
+3. posso usar os conjuntos, como descrito lá no topo do arquivo, pra simplificar a linguagem ou tenho que escrever tudo o que está inserido no conjunto?
