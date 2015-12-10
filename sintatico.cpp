@@ -98,11 +98,12 @@ bool Z(){
 bool Y(){
 	if(Bn()){
 		return true;
-	}else if(tk == 13){
-		if(Read())
-			return Bn();
-	}else
-		return W();	
+	}else{
+		if(tk == 13){
+			if(Read())
+				return Bn();
+	}
+	return W();	
 }
 /*W -> = Exp Bn*/
 bool W(){
@@ -260,38 +261,43 @@ bool Exp(){
 		if(Bop())
 			return Exp1();
 		return false;
-	}else if(tk == '('){
-		if (exp())
-			if (tk == ')')
-				return true;
-		return false;
-	}else
-		Exp2();
+	}else{
+		if(tk == '('){
+			if (exp())
+				if (tk == ')')
+					return true;
+			return false;	
+	} 
+	return Exp2();
 }
 /* Exp1 -> Uop Exp | (Exp) | Exp2, */
 bool Exp1(){
 	if(Uop()){
 		return Exp();
-	}else if(tk == '('){
-		if (exp())
-			if (tk == ')')
-				return true;
-		return false;
-	}else
-		return Exp2();
+	}else{
+		if(tk == '('){
+			if (exp())
+				if (tk == ')')
+					return true;
+			return false;	
+	} 
+	return Exp2();
 }
 /* Exp2 -> Num | Var | Boolean | nil, */
 bool Exp2(){
 	if(tk == 22){
 		return Num();
-	}else if(tk == 24){
+	}
+	if(tk == 24){
 		return Var();
-	}else if(tk == 31 || tk == 32){
+	}
+	if(tk == 31 || tk == 32){
 		return Booleann();
-	}else if(tk == 30){
+	}
+	if(tk == 30){
 		return false;
-	}else
-		return false;
+	}
+	return false;
 }
 /* Uop -> - | !, */
 bool Uop(){
