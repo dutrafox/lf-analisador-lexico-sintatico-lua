@@ -26,6 +26,8 @@ int leToken() {
 bool hasname=false;
 
 int main(int argc, char *argv[]) {
+	coluna = 0;
+	linha = 0;
 	return 0;
 }
 
@@ -158,7 +160,7 @@ bool Cond(){
 bool IF(){
 	if(tk == 27){
 		if(Exp()){
-			tk = token(char c, FILE *fp);
+			tk = leToken();
 			if(tk == 17){
 				if(Bn()){
 					if(CMD()){
@@ -176,11 +178,11 @@ bool IF(){
 /* ELSE -> else { Bn CMD } Bn | ε*/
 bool ELSE(){
 	if(tk == 32){
-		tk = leToken(char c, FILE *fp);
+		tk = leToken();
 		if(tk == 17){
 			if(Bn()){
 				if(CMD()){
-					tk = leToken(char c, FILE *fp);
+					tk = leToken();
 					if(tk == 18){
 						if(Bn())
 							return true;
@@ -209,9 +211,9 @@ bool Booleann(){
 /* Read -> io.read(), */
 bool Read(){
 	if(tk == 28){
-		tk = token(char c, FILE *fp);
+		tk = leToken();
 		if(tk == 15){
-			tk = token(char c, FILE *fp);
+			tk = leToken();
 				if(tk == 16)
 					return true;
 		}
@@ -222,10 +224,10 @@ bool Read(){
 /* Write -> io.write(Wexp) Bn, */
 bool Write(){
 	if(tk == 29){
-		tk = token(char c, FILE *fp);
+		tk = leToken();
 		if(tk == 15)
 			if(Wexp())
-				tk = token(char c, FILE *fp);
+				tk = leToken();
 				if(tk == 16)
 					return Bn();
 	}else
@@ -350,7 +352,7 @@ Num(){
 /* Num2 -> κnum2 | κ, */
 bool Num2(){
 	if (tk == 22){
-		tk = token(char c, FILE *fp);
+		tk = leToken();
 		if (tk == 22){
 			return Num2();
 		}else{
