@@ -14,7 +14,7 @@ int token(char c, FILE *fp);
 int lerPalavra(char c, FILE *fp);
 int lerVariavel(FILE *fp);
 int lerString(FILE *fp);
-void lerNumero(FILE *fp);
+int lerNumero(FILE *fp);
 
 int lerVariavel(FILE *fp){
 	char c = getc(fp);
@@ -351,13 +351,23 @@ int lerString(FILE *fp){
 	else return 0;
 }
 
-void lerNumero(FILE *fp){
+int lerNumero(FILE *fp){
 	char c=getc(fp);
+	int retorno = 1;
 	while(c >= '0' && c <= '9'){
 		coluna++;
 		c=getc(fp);
 	}
+	if(c == '.'){
+		retorno = 0;
+		while(c >= '0' && c <= '9'){
+			retorno = 1;
+			coluna++;
+			c=getc(fp);
+		}
+	}
 	fseek(fp, -sizeof(char), SEEK_CUR);
+	return retorno;
 }
 
 /** Retornos função token
@@ -414,9 +424,10 @@ int token(char c, FILE *fp){
 		}else return 0;
 	}else if(c >= '0' && c <= '9'){
 		coluna++;
-		lerNumero(fp);
-		cout << "numero" << "@" << linha << ":" << coluna << endl;
-		return 22;
+		if(lerNumero(fp) == 1){
+			cout << "numero" << "@" << linha << ":" << coluna << endl;
+			return 22;
+		}else return 0;
 	}else{
 		switch(c){
 			case '\n':
