@@ -6,11 +6,23 @@
 #include "sintatico.hpp"
 #include "lexico.hpp"
 
+
+
 char tk; //precisa ter o token lido no léxico
 extern std::ifstream arq;
 extern int lasttokenstart;
 extern int lastnewline;
 extern int linhas;
+
+extern int coluna, linha;
+int token(char c, FILE *fp);
+
+int leToken() {
+	if (c=getc(fp)) != EOF){
+		return token(c, fp);
+	}
+}
+
 bool hasname=false;
 
 int main(int argc, char *argv[]) {
@@ -34,21 +46,87 @@ FIXED::
 	Z -> Bn | W,
 	Y -> Bn | W | = Read Bn,
 	W -> = Exp Bn*/
+bool Decl(){
+	if(tk == 25){
+		
+	}
+}
 
 /* Atrib -> Declna = Exp | Declna, Atrib, Exp | Declna = Read, 
 Fixed::
 	Attrib -> Declna Attrib2
 Attrib2 -> = Attrib3 | , Attrib, Exp
 Attrib3 -> Exp | Read,*/
+/* Attrib -> Declna Attrib2 */
+bool Attrib(){
+	if(Declna()){
+		return Attrib2();
+	}else
+		return false;
+}
+/* Attrib2 -> = Attrib3 | , Attrib, Exp */
+bool Attrib2(){
+	if(tk == 33){
+		if(Attrib()){
+			tk = leToken();
+			if(tk == 33){
+				return Exp();
+			}
+		}
+	}else{
+		return Attrib3();
+	}
+}
+/* Attrib3 -> Exp | Read */
+bool Attrib3(){
 
+}
 /* Cond -> if Exp { Bn CMD } Bn | if Exp { Bn CMD } Bn else { Bn CMD } Bn, 
 FIXED::
 	Cond -> IF,
-	IF -> if Exp { Bn CMD } Bn ELSE
+	IF -> if Exp { Bn CMD } Bn ELSE,
 	ELSE -> else { Bn CMD } Bn | ε*/
 /* Cond -> IF, */
 bool Cond(){
-
+	return IF();
+}
+/* IF -> if Exp { Bn CMD } Bn ELSE,*/
+bool IF(){
+	if(tk == 27){
+		if(Exp()){
+			tk = token(char c, FILE *fp);
+			if(tk == 17){
+				if(Bn()){
+					if(CMD()){
+						if(tk == 18){
+							if(Bn()){
+								return ELSE();
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+/* ELSE -> else { Bn CMD } Bn | ε*/
+bool ELSE(){
+	if(tk == 32){
+		tk = leToken(char c, FILE *fp);
+		if(tk == 17){
+			if(Bn()){
+				if(CMD()){
+					tk = leToken(char c, FILE *fp);
+					if(tk == 18){
+						if(Bn())
+							return true;
+					}
+				}
+			}
+		}
+	}else{
+		return true;
+	}
 }
 /* Declna -> local Var | Var, */
 bool Declna(){

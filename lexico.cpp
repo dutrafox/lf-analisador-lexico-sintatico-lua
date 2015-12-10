@@ -404,6 +404,8 @@ int lerNumero(FILE *fp){
 	31 -	true
 	32 -	false
 	33 -	virgula
+	FALTA: 
+	34 - else
 */
 
 int token(char c, FILE *fp){
