@@ -48,7 +48,10 @@ FIXED::
 	W -> = Exp Bn*/
 bool Decl(){
 	if(tk == 25){
-		
+		return X();
+	}
+	if(Var()){
+		return Y();
 	}
 }
 

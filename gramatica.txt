@@ -9,9 +9,16 @@ v(ou V): é o conjunto V do automato
 P = {
 	      S -> CMD,
 	    CMD -> AtribBnCMD | SpaceCMD | CondCMD | TabCMD | WriteCMD | BnCMD | DeclCMD | ε
-	   Decl -> local Var Bn | Var Bn | local Var = Exp Bn | Var = Exp Bn | Var = Read Bn,
-	  Atrib -> Declna = Exp | Declna, Atrib, Exp | Declna = Read,
- 	   Cond -> if Exp { Bn CMD } Bn | if Exp { Bn CMD } Bn else { Bn CMD } Bn,
+	   Decl -> local X | Var Y,
+          X -> Var Z,
+		  Z -> Bn | W,
+		  Y -> Bn | W | = Read Bn,
+	 Attrib -> Declna Attrib2
+	Attrib2 -> = Attrib3 | , Attrib, Exp
+	Attrib3 -> Exp | Read,
+	   Cond -> IF,
+         IF -> if Exp { Bn CMD } Bn ELSE,
+	   ELSE -> else { Bn CMD } Bn | ε
 	 Declna -> locar Var | Var,
 	Boolean ->  true | false,
 	   Read -> io.read(),
