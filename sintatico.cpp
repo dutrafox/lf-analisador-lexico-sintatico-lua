@@ -34,8 +34,19 @@ FIXED::
 	Z -> Bn | W,
 	Y -> Bn | W | = Read Bn,
 	W -> = Exp Bn*/
-/* Atrib -> Declna = Exp | Declna, Atrib, Exp | Declna = Read, */
-/* Cond -> if Exp { Bn CMD } Bn | if Exp { Bn CMD } Bn else { Bn CMD } Bn, */
+
+/* Atrib -> Declna = Exp | Declna, Atrib, Exp | Declna = Read, 
+Fixed::
+	Attrib -> Declna Attrib2
+Attrib2 -> = Attrib3 | , Attrib, Exp
+Attrib3 -> Exp | Read,*/
+
+/* Cond -> if Exp { Bn CMD } Bn | if Exp { Bn CMD } Bn else { Bn CMD } Bn, 
+FIXED::
+	Cond -> IF,
+	IF -> if Exp { Bn CMD } Bn ELSE
+	ELSE -> else { Bn CMD } Bn | ε*/
+/* Cond -> IF, */
 bool Cond(){
 
 }
@@ -177,7 +188,7 @@ bool Var2(){
 		return false;
 }
 /* Num -> .kNum | .Num2 | k, */
-bool Num(){
+/*bool Num(){
 	if (tk == 33){
 		tk = token(char c, FILE *fp);
 		if (tk == 22){
@@ -188,6 +199,11 @@ bool Num(){
 		return true;
 	}else
 		return false;
+}*/
+Num(){ 
+	if(tk == 22){ 
+		return true; 
+	}else return false; 
 }
 /* Num2 -> κnum2 | κ, */
 bool Num2(){
