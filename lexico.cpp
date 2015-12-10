@@ -393,6 +393,10 @@ void lerNumero(FILE *fp){
 	30 -	nil
 	31 -	true
 	32 -	false
+	FALTAM:
+	33 - 	.
+	34 - 	num . flutuante
+	35 - ,
 */
 int token(char c, FILE *fp){
 	if((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_'){

@@ -25,7 +25,7 @@ P = {
 	    Bop -> ** | * | / | + | - | > | >= | < | <= | == | & | |,
 	     Bn -> \n
 	    Var -> αVar2,
-	   Var2 -> αVar2, Num2Var2,
+	   Var2 -> αVar2 | Num2Var2,
 	    Num -> .kNum| .Num2 | k,
 	   Num2 -> κnum2 | κ,
 	 String -> "STR",
