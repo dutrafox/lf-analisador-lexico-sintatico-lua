@@ -36,7 +36,30 @@ bool S() {
 
 /* CMD -> AtribBnCMD | SpaceCMD | CondCMD | TabCMD | WriteCMD | BnCMD | DeclCMD | ε */
 bool CMD() {
-	
+	if(Atrib()){
+		if(Bn()){
+			return CMD();
+		}
+	}
+	if(Space()){
+		return CMD();
+	}
+	if(Cond()){
+		return CMD();
+	}
+	/*if(Tab()){
+		return CMD();
+	}*/
+	if(Write()){
+		return CMD();
+	}
+	if(Bn()){
+		return CMD();
+	}
+	if(Decl()){
+		return CMD();
+	}
+	return true;
 }
 
 /* Decl -> local Var Bn | Var Bn | local Var = Exp Bn | Var = Exp Bn | Var = Read Bn, 
@@ -46,6 +69,7 @@ FIXED::
 	Z -> Bn | W,
 	Y -> Bn | W | = Read Bn,
 	W -> = Exp Bn*/
+/* Decl -> local X | Var Y, */
 bool Decl(){
 	if(tk == 25){
 		return X();
@@ -54,7 +78,37 @@ bool Decl(){
 		return Y();
 	}
 }
-
+/* X -> Var Z, */
+bool X(){
+	if (Var()){
+		return Z();
+	}else
+		return false;
+}
+/* Z -> Bn | W,*/
+bool Z(){
+	if(Bn()){
+		return true;
+	}else
+		return W();
+}
+/* Y -> Bn | W | = Read Bn, */
+bool Y(){
+	if(Bn()){
+		return true;
+	}else if(tk == 13){
+		if(Read())
+			return Bn();
+	}else
+		return W();	
+}
+/*W -> = Exp Bn*/
+bool W(){
+	if(Exp()){
+		return Bn();
+	}else
+		return false;
+}
 /* Atrib -> Declna = Exp | Declna, Atrib, Exp | Declna = Read, 
 Fixed::
 	Attrib -> Declna Attrib2
@@ -82,7 +136,14 @@ bool Attrib2(){
 }
 /* Attrib3 -> Exp | Read */
 bool Attrib3(){
-
+	tk = leToken();
+	if (Read())
+		return true;
+	else {
+		if (Exp())
+			return true;
+	}
+	return false;
 }
 /* Cond -> if Exp { Bn CMD } Bn | if Exp { Bn CMD } Bn else { Bn CMD } Bn, 
 FIXED::
