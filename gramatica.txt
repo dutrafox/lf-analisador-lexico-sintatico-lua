@@ -6,6 +6,11 @@ v(ou V): é o conjunto V do automato
 γ = {TODO O ALFABETO da linguagem} 
 κ = {0,...,9}
 
+G = (N, T, P, S)
+
+N = {S, CMD, Decl, X, Z, Y, Attrib, Attrib2, Attrib3,
+		Cond, IF,}
+
 P = {
 	      S -> CMD,
 	    CMD -> AtribBnCMD | SpaceCMD | CondCMD | TabCMD | WriteCMD | BnCMD | DeclCMD | ε

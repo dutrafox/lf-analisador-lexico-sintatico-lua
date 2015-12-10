@@ -535,7 +535,7 @@ int token(char c, FILE *fp){
 	}
 }
 
-int main(int argc, char *argv[]){
+/*int main(int argc, char *argv[]){
 	FILE *fp;
 	fp=fopen(argv[1],"r");
 	int coluna=0, linha=0;
@@ -543,4 +543,4 @@ int main(int argc, char *argv[]){
 	while((c=getc(fp)) != EOF){
 		token(c, fp);
 	}
-}
+}*/
